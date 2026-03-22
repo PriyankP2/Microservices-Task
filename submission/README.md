@@ -123,6 +123,7 @@ order-service     ClusterIP   10.101.103.133   <none>        3002/TCP         1m
 product-service   ClusterIP   10.100.156.155   <none>        3001/TCP         1m
 user-service      ClusterIP   10.101.32.161    <none>        3000/TCP         1m
 ```
+<img width="1083" height="486" alt="image" src="https://github.com/user-attachments/assets/5663ea6c-04d5-4420-af17-0d05c717043c" />
 
 ---
 
@@ -134,6 +135,8 @@ Open a second terminal and run:
 ```bash
 kubectl port-forward svc/gateway-service 3003:3003
 ```
+<img width="943" height="140" alt="image" src="https://github.com/user-attachments/assets/09a26188-bd6b-4f6f-8be0-02d9ef9ebaee" />
+
 
 Then test in your current terminal:
 ```bash
@@ -141,6 +144,7 @@ curl http://localhost:3003/api/users
 curl http://localhost:3003/api/products
 curl http://localhost:3003/api/orders
 ```
+<img width="1212" height="170" alt="image" src="https://github.com/user-attachments/assets/e60b74ea-1046-47a7-91b1-30456e73153b" />
 
 Expected responses:
 ```json
