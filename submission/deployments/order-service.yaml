@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: default
+  labels:
+    app: order-service
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+        tier: backend
+    spec:
+      containers:
+        - name: order-service
+          image: 975050024946.dkr.ecr.us-west-1.amazonaws.com/order-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3002
+          env:
+            - name: PORT
+              value: "3002"
+            - name: NODE_ENV
+              value: "production"
+            - name: USER_SERVICE_URL
+              value: "http://user-service:3000"
+            - name: PRODUCT_SERVICE_URL
+              value: "http://product-service:3001"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /orders
+              port: 3002
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /orders
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
