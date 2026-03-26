@@ -240,27 +240,3 @@ minikube delete
 minikube start --driver=docker --memory=4096 --cpus=2
 # Re-create ECR secret, then re-apply manifests
 ```
-
----
-
-## Directory Structure
-
-```
-submission/
-├── deployments/
-│   ├── user-service.yaml       # Deployment: ECR image, probes, resource limits
-│   ├── product-service.yaml
-│   ├── order-service.yaml
-│   └── gateway-service.yaml    # Includes downstream service env vars
-├── services/
-│   ├── user-service.yaml       # ClusterIP :3000
-│   ├── product-service.yaml    # ClusterIP :3001
-│   ├── order-service.yaml      # ClusterIP :3002
-│   └── gateway-service.yaml    # NodePort :3003 / nodePort 30003
-├── ingress/
-│   └── ingress.yaml            # Bonus: NGINX path-based routing
-├── screenshots/
-│   ├── pods.png                # kubectl get pods
-│   ├── logs.png                # Service communication logs
-│   └── service-test.png        # curl test results
-└── README.md
